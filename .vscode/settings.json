@@ -2,6 +2,7 @@
     "cSpell.words": [
         "libfontconfig",
         "libfreetype",
+        "ohlcv",
         "rustfmt",
         "serde"
     ]

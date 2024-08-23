@@ -199,7 +199,7 @@ impl StockInformation {
 
         fs::create_dir_all(&dir)?;
 
-        let filepath = format!("{}/{}_candlestick_chart.png", &dir, timestamp);
+        let filepath = format!("{}/{}_candlestick_chart_ohlcv.png", &dir, timestamp);
         let drawing_area =
             BitMapBackend::new(&filepath, (height.unwrap_or(1024), width.unwrap_or(768)))
                 .into_drawing_area();
