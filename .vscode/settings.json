@@ -1,13 +1,18 @@
 {
     "cSpell.words": [
+        "alloc",
+        "armv",
         "BNCRP",
         "Corpo",
         "debuginfo",
+        "gnueabihf",
         "libfontconfig",
         "libfreetype",
         "ohlcv",
         "rustfmt",
+        "rustlib",
         "serde",
+        "struct",
         "unittests"
     ]
 }

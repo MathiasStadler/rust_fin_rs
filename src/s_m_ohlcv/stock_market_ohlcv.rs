@@ -3,6 +3,7 @@
 
 use std::{error::Error, fs};
 
+use chrono::DateTime;
 use chrono::{prelude::*, Duration};
 use plotters::{
     prelude::{
@@ -224,10 +225,10 @@ impl StockInformation {
         let stock_data_series_last_day_idx = stock_data_series.len() - 1;
 
         let (from_date, to_date) = (
-            stock_data_series[0].date.date() - Duration::days(1),
+            stock_data_series[0].date.NaiveDate() - Duration::days(1),
             stock_data_series[stock_data_series_last_day_idx]
                 .date
-                .date()
+                .NaiveDate()
                 + Duration::days(1),
         );
 
@@ -277,14 +278,15 @@ impl StockInformation {
 
             for (idx, ma_tuple) in moving_averages_2d.iter().enumerate() {
                 let (ma_day, moving_averages) = ma_tuple;
-                let mut ma_line_data: Vec<(Date<Utc>, f64)> = Vec::with_capacity(3);
+                let mut ma_line_data: Vec<(NaiveDate, f64)> = Vec::with_capacity(3);
+                // let mut ma_line_data: Vec<NaiveDate> = Vec::with_capacity(3);
                 let ma_len = moving_averages.len();
 
                 for i in 0..ma_len {
                     // Let start moving average day at the day where adequate data has been formed.
                     let ma_day = i + ma_day.to_usize().unwrap() - 1;
                     ma_line_data.push((
-                        stock_data_series[ma_day].date.date(),
+                        stock_data_series[ma_day].date.NaiveDate(),
                         moving_averages[i].to_f64().unwrap(),
                     ));
                 }

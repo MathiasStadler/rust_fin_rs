@@ -1,212 +1,53 @@
    Compiling rust_fin_rs v0.1.1 (/home/user/workspace_rust/rust_fin_rs)
-warning: unused import: `rust_decimal_macros::dec`
-  --> src/s_m_ohlcv/stock_market_test_ohlcv.rs:12:5
-   |
-12 | use rust_decimal_macros::dec;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: `#[warn(unused_imports)]` on by default
-
-warning: unused import: `rust_decimal_macros::dec`
-  --> src/s_m_ohlcv/stock_market_test_ohlcv_show_chart.rs:16:5
-   |
-16 | use rust_decimal_macros::dec;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^
-
-warning: use of deprecated struct `chrono::Date`: Use `NaiveDate` or `DateTime<Tz>` instead
-   --> src/s_m_ohlcv/stock_market_ohlcv.rs:280:44
+error[E0599]: no method named `DateTime` found for struct `DateTime` in the current scope
+   --> src/s_m_ohlcv/stock_market_ohlcv.rs:214:33
     |
-280 |                 let mut ma_line_data: Vec<(Date<Utc>, f64)> = Vec::with_capacity(3);
-    |                                            ^^^^
+214 |                 stock_data.date.DateTime(),
+    |                                 ^^^^^^^^
     |
-    = note: `#[warn(deprecated)]` on by default
-
-warning: use of deprecated method `chrono::DateTime::<Tz>::date`: Use `date_naive()` instead
-   --> src/s_m_ohlcv/stock_market_ohlcv.rs:213:33
+help: there is a method `time` with a similar name
     |
-213 |                 stock_data.date.date(),
-    |                                 ^^^^
+214 |                 stock_data.date.time(),
+    |                                 ~~~~
 
-warning: use of deprecated method `chrono::DateTime::<Tz>::date`: Use `date_naive()` instead
-   --> src/s_m_ohlcv/stock_market_ohlcv.rs:227:39
+error[E0599]: no method named `NaiveDate` found for struct `DateTime` in the current scope
+   --> src/s_m_ohlcv/stock_market_ohlcv.rs:228:39
     |
-227 |             stock_data_series[0].date.date() - Duration::days(1),
-    |                                       ^^^^
+228 |             stock_data_series[0].date.NaiveDate() - Duration::days(1),
+    |                                       ^^^^^^^^^ method not found in `DateTime<Utc>`
 
-warning: use of deprecated method `chrono::DateTime::<Tz>::date`: Use `date_naive()` instead
-   --> src/s_m_ohlcv/stock_market_ohlcv.rs:230:18
+error[E0599]: no method named `NaiveDate` found for struct `DateTime` in the current scope
+   --> src/s_m_ohlcv/stock_market_ohlcv.rs:231:18
     |
-230 |                 .date()
-    |                  ^^^^
-
-warning: use of deprecated method `chrono::DateTime::<Tz>::date`: Use `date_naive()` instead
-   --> src/s_m_ohlcv/stock_market_ohlcv.rs:287:56
+229 | /             stock_data_series[stock_data_series_last_day_idx]
+230 | |                 .date
+231 | |                 .NaiveDate()
+    | |                 -^^^^^^^^^ method not found in `DateTime<Utc>`
+    | |_________________|
     |
-287 |                         stock_data_series[ma_day].date.date(),
-    |                                                        ^^^^
 
-warning: function `generate_utc_date_from_date_string` is never used
-  --> src/s_m_ohlcv/stock_market_test_ohlcv.rs:17:4
-   |
-17 | fn generate_utc_date_from_date_string(date_string: &str) -> DateTime<Utc> {
-   |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: `#[warn(dead_code)]` on by default
-
-warning: function `generate_stock_data` is never used
-  --> src/s_m_ohlcv/stock_market_test_ohlcv.rs:22:4
-   |
-22 | fn generate_stock_data(date_string: &str) -> StockData {
-   |    ^^^^^^^^^^^^^^^^^^^
-
-warning: function `generate_stock_data_ohlcv` is never used
-  --> src/s_m_ohlcv/stock_market_test_ohlcv.rs:82:4
-   |
-82 | fn generate_stock_data_ohlcv(date_string: &str) -> StockData {
-   |    ^^^^^^^^^^^^^^^^^^^^^^^^^
-
-warning: function `generate_stock_data_series` is never used
-   --> src/s_m_ohlcv/stock_market_test_ohlcv.rs:142:4
+error[E0599]: no method named `NaiveDate` found for struct `DateTime` in the current scope
+   --> src/s_m_ohlcv/stock_market_ohlcv.rs:289:56
     |
-142 | fn generate_stock_data_series(limit: Option<u8>) -> Vec<StockData> {
-    |    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+289 |                         stock_data_series[ma_day].date.NaiveDate(),
+    |                                                        ^^^^^^^^^ method not found in `DateTime<Utc>`
 
-warning: struct `StockData` is never constructed
-  --> src/s_m_ohlcv/stock_market_ohlcv.rs:25:12
-   |
-25 | pub struct StockData {
-   |            ^^^^^^^^^
-   |
-   = note: `StockData` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
-
-warning: associated function `new` is never used
-  --> src/s_m_ohlcv/stock_market_ohlcv.rs:36:12
-   |
-35 | impl StockData {
-   | -------------- associated function in this implementation
-36 |     pub fn new(
-   |            ^^^
-
-warning: struct `StockInformation` is never constructed
-  --> src/s_m_ohlcv/stock_market_ohlcv.rs:56:12
-   |
-56 | pub struct StockInformation {
-   |            ^^^^^^^^^^^^^^^^
-   |
-   = note: `StockInformation` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
-
-warning: multiple associated items are never used
-   --> src/s_m_ohlcv/stock_market_ohlcv.rs:63:12
+error[E0308]: mismatched types
+   --> src/s_m_ohlcv/stock_market_test_ohlcv_show_chart.rs:132:34
     |
-62  | impl StockInformation {
-    | --------------------- associated items in this implementation
-63  |     pub fn new(company_name: String, symbol: String, stock_data_series: Vec<StockData>) -> Self {
-    |            ^^^
-...
-71  |     pub fn get_change_of_stock_data_series(&self) -> Option<Vec<StockData>> {
-    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-...
-114 |     pub fn get_change_of_stock_data_with_given_date(
-    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-...
-129 |     pub fn get_moving_averages(&self, ma_days: u16) -> Option<Vec<Decimal>> {
-    |            ^^^^^^^^^^^^^^^^^^^
-...
-181 |     pub fn show_chart(
-    |            ^^^^^^^^^^
-...
-330 |     pub fn get_post_split_data(
-    |            ^^^^^^^^^^^^^^^^^^^
-...
-346 |     pub fn get_dividend_income(
-    |            ^^^^^^^^^^^^^^^^^^^
-...
-353 |     pub fn get_yield_rate(dividend_per_share: Decimal, price_per_share: Decimal) -> Decimal {
-    |            ^^^^^^^^^^^^^^
-...
-356 |     pub fn get_interest_income(interest_rate: Decimal, amount: Decimal) -> Decimal {
-    |            ^^^^^^^^^^^^^^^^^^^
-
-warning: function `generate_utc_date_from_date_string` is never used
-  --> src/s_m_ohlcv/stock_market_test_ohlcv_show_chart.rs:21:4
-   |
-21 | fn generate_utc_date_from_date_string(date_string: &str) -> DateTime<Utc> {
-   |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-warning: function `generate_stock_data` is never used
-  --> src/s_m_ohlcv/stock_market_test_ohlcv_show_chart.rs:26:4
-   |
-26 | fn generate_stock_data(date_string: &str) -> StockData {
-   |    ^^^^^^^^^^^^^^^^^^^
-
-warning: function `generate_stock_data_ohlcv` is never used
-  --> src/s_m_ohlcv/stock_market_test_ohlcv_show_chart.rs:86:4
-   |
-86 | fn generate_stock_data_ohlcv(date_string: &str) -> StockData {
-   |    ^^^^^^^^^^^^^^^^^^^^^^^^^
-
-warning: function `generate_stock_data_series` is never used
-   --> src/s_m_ohlcv/stock_market_test_ohlcv_show_chart.rs:146:4
+132 |     let open = Decimal::from_f64(base_stock_data_series[rng.gen_range(0..base_data_series_len)].0)
+    |                ----------------- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `f64`, found integer
+    |                |
+    |                arguments to this function are incorrect
     |
-146 | fn generate_stock_data_series(limit: Option<u8>) -> Vec<StockData> {
-    |    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: associated function defined here
+   --> /opt/rust/registry/src/index.crates.io-1cd66030c949c28d/num-traits-0.2.19/src/cast.rs:486:8
+    |
+486 |     fn from_f64(n: f64) -> Option<Self> {
+    |        ^^^^^^^^
 
-warning: `rust_fin_rs` (lib) generated 19 warnings (run `cargo fix --lib -p rust_fin_rs` to apply 2 suggestions)
-warning: function `generate_stock_data_ohlcv` is never used
-  --> src/s_m_ohlcv/stock_market_test_ohlcv.rs:82:4
-   |
-82 | fn generate_stock_data_ohlcv(date_string: &str) -> StockData {
-   |    ^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: `#[warn(dead_code)]` on by default
-
-warning: fields `net_change` and `net_change_percent` are never read
-  --> src/s_m_ohlcv/stock_market_ohlcv.rs:31:5
-   |
-25 | pub struct StockData {
-   |            --------- fields in this struct
-...
-31 |     net_change: Option<Decimal>,
-   |     ^^^^^^^^^^
-32 |     net_change_percent: Option<Decimal>,
-   |     ^^^^^^^^^^^^^^^^^^
-   |
-   = note: `StockData` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
-
-warning: field `symbol` is never read
-  --> src/s_m_ohlcv/stock_market_ohlcv.rs:58:5
-   |
-56 | pub struct StockInformation {
-   |            ---------------- field in this struct
-57 |     company_name: String,
-58 |     symbol: String,
-   |     ^^^^^^
-   |
-   = note: `StockInformation` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
-
-warning: `rust_fin_rs` (lib test) generated 9 warnings (6 duplicates)
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 6.49s
-     Running unittests src/lib.rs (target/debug/deps/rust_fin_rs-d07e7e3c6dbf29d4)
-
-running 12 tests
-test s_m_ohlcv::stock_market_test_ohlcv_show_chart::it_creates_a_new_stock_information_with_data_series_and_does_not_show_chart ... ok
-test s_m_ohlcv::stock_market_test_ohlcv_show_chart::it_creates_a_new_stock_information_with_data_series_and_does_not_find_a_specific_stock_data ... ok
-test s_m_ohlcv::stock_market_test_ohlcv_show_chart::it_creates_a_new_stock_information_with_data_series_and_finds_specific_stock_data ... ok
-test s_m_ohlcv::stock_market_test_ohlcv_show_chart::it_creates_a_new_stock_information_with_data_series ... ok
-test s_m_ohlcv::stock_market_test_ohlcv_show_chart::it_creates_a_new_stock_information_with_data_series_and_gets_moving_averages ... ok
-test s_m_ohlcv::stock_market_test_ohlcv_show_chart::it_creates_a_new_stock_information_without_data_series ... ok
-test s_m_ohlcv::stock_market_test_ohlcv_show_chart::it_gets_interest_income ... ok
-test s_m_ohlcv::stock_market_test_ohlcv_show_chart::it_creates_a_new_stock_information_with_data_series_and_gets_moving_averages_two ... ok
-test s_m_ohlcv::stock_market_test_ohlcv_show_chart::it_gets_post_split_data ... ok
-test s_m_ohlcv::stock_market_test_ohlcv_show_chart::it_gets_dividend_income ... ok
-test s_m_ohlcv::stock_market_test_ohlcv_show_chart::it_gets_yield_rate ... ok
-test s_m_ohlcv::stock_market_test_ohlcv_show_chart::it_creates_a_new_stock_information_with_data_series_and_show_chart_with_moving_average ... ok
-
-test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 13 filtered out; finished in 1.63s
-
-     Running unittests src/main.rs (target/debug/deps/rust_fin_rs-9a49febc411d007c)
-
-running 0 tests
-
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
-
+Some errors have detailed explanations: E0308, E0599.
+For more information about an error, try `rustc --explain E0308`.
+error: could not compile `rust_fin_rs` (lib) due to 5 previous errors
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `rust_fin_rs` (lib test) due to 5 previous errors
