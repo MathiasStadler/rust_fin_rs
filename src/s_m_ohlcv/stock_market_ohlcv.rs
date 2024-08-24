@@ -176,6 +176,8 @@ impl StockInformation {
 
         return Some(moving_averages);
     }
+    
+    
     pub fn show_chart(
         &self,
         ma_days: Vec<u16>,

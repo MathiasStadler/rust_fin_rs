@@ -1,3 +1,7 @@
+// run inside with - /home/user/workspace_rust/rust_fin_rs
+// rm -rf out.txt && cargo test --package rust_fin_rs s_m_ohlcv::stock_market_test_ohlcv_show_chart    >out.txt 2>&1
+
+
 // FROM HERE
 // https://github.com/3g015st/fin-rs/blob/master/src/stock_market/stock_market_test.rs
 
@@ -441,29 +445,31 @@ fn it_creates_a_new_stock_information_with_data_series_and_gets_moving_averages_
     }
 }
 
+// #[test]
+// fn it_creates_a_new_stock_information_with_data_series_and_gets_no_moving_averages() {
+//     // Lacks moving averages data due to ma days input is greater than the stock data series available.
+//     let stock_data_series = generate_stock_data_series(Some(4));
+//     let stock_information = StockInformation::new(
+//         "BenCorpo".to_string(),
+//         "BNCRP".to_string(),
+//         stock_data_series,
+//     );
+
+//     let moving_averages = stock_information.get_moving_averages(5);
+
+//     println!("moving_averages {:?}", moving_averages);
+//     match moving_averages {
+//         Some(_) => {
+//             println!("Moving averages found!")
+//         }
+//         None => assert!(true),
+//     }
+// }
+
+
+// here show_charts
 #[test]
-fn it_creates_a_new_stock_information_with_data_series_and_gets_no_moving_averages() {
-    // Lacks moving averages data due to ma days input is greater than the stock data series available.
-    let stock_data_series = generate_stock_data_series(Some(4));
-    let stock_information = StockInformation::new(
-        "BenCorpo".to_string(),
-        "BNCRP".to_string(),
-        stock_data_series,
-    );
-
-    let moving_averages = stock_information.get_moving_averages(5);
-
-    println!("moving_averages {:?}", moving_averages);
-    match moving_averages {
-        Some(_) => {
-            println!("Moving averages found!")
-        }
-        None => assert!(true),
-    }
-}
-
-#[test]
-fn _none_it_creates_a_new_stock_information_with_data_series_and_show_chart_with_moving_average() {
+fn it_creates_a_new_stock_information_with_data_series_and_show_chart_with_moving_average() {
     let stock_data_series = generate_stock_data_series(Some(14));
     let stock_information = StockInformation::new(
         "BenCorpo".to_string(),

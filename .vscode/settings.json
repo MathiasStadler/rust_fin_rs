@@ -2,10 +2,12 @@
     "cSpell.words": [
         "BNCRP",
         "Corpo",
+        "debuginfo",
         "libfontconfig",
         "libfreetype",
         "ohlcv",
         "rustfmt",
-        "serde"
+        "serde",
+        "unittests"
     ]
 }
